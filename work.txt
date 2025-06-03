@@ -1,0 +1,48 @@
+You can check this video:
+https://www.youtube.com/watch?v=GReoWKUnwAg
+
+
+1. npm install prisma --save-dev
+
+2. npm install @prisma/client
+
+
+
+3.  prisma init   
+
+📁 prisma
+   └── schema.prisma  ← Prisma config
+.env                  ← Environment variables
+
+
+
+4. create .env and 
+DATABASE_URL="postgresql://username:password@localhost:5432/dbname"
+
+
+
+5. CREATE DATABASE bidding_db;
+
+
+
+6.  Open prisma/schema.prisma and write:
+prisma/schema.prismagenerator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
+
+
+7. after edit the shema comment like : 
+npx prisma migrate dev --name=User_schema
